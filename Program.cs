@@ -101,9 +101,8 @@ namespace IPA
 
             int testResult = 0;
 
-            double avgHWResult = 0, medianResult = 0, avgResult = 0;
+            double medianResult = 0, avgResult = 0;
 
-            //bool continueInput = true;
             bool isAvgSelected = true;
             bool generateNumbers = false;
 
@@ -237,8 +236,7 @@ namespace IPA
             {
                 while (true)
                 {
-                    int hWVal;
-                    Console.WriteLine(".......");
+                    int homeWorkVal;
 
                     if (generateNumbers)
                     {
@@ -249,23 +247,22 @@ namespace IPA
 
                     Console.Write("Iveskite {0} namu darbo pazymi: ", homeWorkResults.Count() + 1);
 
-                    if (!int.TryParse(Console.ReadLine(), out hWVal))
+                    if (!int.TryParse(Console.ReadLine(), out homeWorkVal))
                     {
                         Console.WriteLine("Turite ivesti skaiciu!");
                     }
-                    else if (hWVal < 0 || hWVal > 10)
+                    else if (homeWorkVal < 0 || homeWorkVal > 10)
                     {
                         Console.WriteLine("Galimi reziai 1-10, pakartokite!");
                     }
                     else
                     {
-                        homeWorkResults.Add(hWVal);
+                        homeWorkResults.Add(homeWorkVal);
                         break;
                     }
                 }
 
-                Console.WriteLine("-------");
-                Console.WriteLine("Ar norite testi namu darbu ivedima? Y/N");
+                Console.Write("Ar norite testi namu darbu ivedima? Y/N : ");
                 continueInput = Console.ReadLine().ToLower().Equals("y");
             }
 
@@ -277,7 +274,7 @@ namespace IPA
             int testResult;
             Random random = new Random();
 
-            Console.WriteLine("*-*-*-*");
+            Console.WriteLine();
             if (!generateNumbers)
             {
                 Console.Write("Egzamino pazymis: ");
@@ -392,9 +389,9 @@ namespace IPA
                 else
                 {
                     Console.WriteLine("{0} {1}", student.IsAvgSelected
-                            ? "{student.AvgResult:F2}"
+                            ? $"{student.AvgResult:F2}"
                             : FormatSpaces("", ' ', defaultOffset + tempS.Length + tableMed.Length),
-                            !student.IsAvgSelected ? "{student.AvgResult:F2}" : FormatSpaces("", ' ', tableMed.Length));
+                            !student.IsAvgSelected ? $"{student.AvgResult:F2}" : FormatSpaces("", ' ', tableMed.Length));
                 }
             }
         }
