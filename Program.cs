@@ -64,7 +64,7 @@ namespace IPA
             try
             {
                 fileInput = System.IO.File.ReadAllLines(
-                    @"C:\Users\Baltrus\Documents\IPA\students.txt");
+                    @"C:\Users\Baltrus\Documents\IPA\IPA\students.txt");
                 foreach (var line in fileInput)
                 {
                     Student student = GetStudentData(true, line);
