@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Text;
 
 namespace IPA
 {
@@ -14,6 +15,7 @@ namespace IPA
             Console.WriteLine("Iveskite duomenu ivedimo tipa:");
             Console.WriteLine("1 - duomenu ivedimas is failo");
             Console.WriteLine("2 - duomenu ivedimas konsoleje");
+            Console.WriteLine("3 - efektyvumas");
 
             while (true)
             {
@@ -30,9 +32,138 @@ namespace IPA
                     InputByConsole();
                     break;
                 }
+                
+                if (Input.Equals("3"))
+                {
+                    //setupFiles();
+                    groupToFiles();
+                    break;
+                }
 
                 Console.WriteLine("Bad input, karotkite!");
             }
+        }
+
+        public static void setupFiles()
+        {
+            string fileLoc = @"C:\Users\Baltrus\Documents\IPA\IPA\";
+            int amountPrefix = 1;
+            Random rnd = new Random();
+                
+            try    
+            {
+                for (int i = 0; i < 5; i++)
+                {
+                    amountPrefix = amountPrefix * 10;
+                    string fileName = fileLoc + amountPrefix + "students.txt";
+                    Console.WriteLine(fileName);
+                    // Check if file already exists. If yes, delete it.     
+                    if (File.Exists(fileName))
+                    {
+                        File.Delete(fileName);
+                    }
+                    
+                    StringBuilder studentsBuilder = new StringBuilder();
+                    for (int j = 1; j <= amountPrefix; j++)
+                    {
+                        studentsBuilder.Append("Vardas"+j+" Pavarde"+j+" "
+                                               +rnd.Next(1,11)+" "
+                                               +rnd.Next(1,11)+" "
+                                               +rnd.Next(1,11)+" "
+                                               +rnd.Next(1,11)+" "
+                                               +rnd.Next(1,11)+" "
+                                               +rnd.Next(1,11)+"\n"
+                                               );
+                    }
+                    
+                    // Create a new file     
+                    using (FileStream fs = File.Create(fileName))
+                    {
+                        // Add some text to file    
+                        Byte[] title = new UTF8Encoding(true).GetBytes(studentsBuilder.ToString());
+                        fs.Write(title, 0, title.Length);
+                    }
+                }
+            }    
+            catch (Exception Ex)    
+            {    
+                Console.WriteLine("Unable to create files");
+            }
+        }
+        
+        private static void groupToFiles()
+        {
+            string[] fileInput;
+            var vargsiukai = new List<Student>();
+            var galvoti = new List<Student>();
+            string vargsiukaiFile = @"C:\Users\Baltrus\Documents\IPA\IPA\vargsiukai.txt";
+            string galvotiFile = @"C:\Users\Baltrus\Documents\IPA\IPA\galvoti.txt";
+
+            try
+            {
+                fileInput = File.ReadAllLines(
+                    @"C:\Users\Baltrus\Documents\IPA\IPA\100000students.txt");
+                foreach (var line in fileInput)
+                {
+                    var student = GetStudentData(true, line);
+                    if (student.AvgResult>=5)
+                    {
+                        galvoti.Add(student);
+                    }
+                    else
+                    {
+                        vargsiukai.Add(student);
+                    }
+                }
+            }
+            catch
+            {
+                Console.WriteLine("-----------------!!!!!!!!!-----------------");
+                Console.WriteLine("Nepavyko nuskaityti failo. Baigiamas darbas");
+            }
+            
+            try    
+            {    
+                // Check if file already exists. If yes, delete it.     
+                if (File.Exists(vargsiukaiFile) || File.Exists(galvotiFile))    
+                {    
+                    File.Delete(vargsiukaiFile);
+                    File.Delete(galvotiFile);
+                }    
+    
+                StringBuilder stringToFile = new StringBuilder();
+                foreach (var student in vargsiukai)
+                {
+                    stringToFile.Append(student.ToString());
+                }
+                
+                using (FileStream fs = File.Create(vargsiukaiFile))     
+                {    
+                    // Add some text to file    
+                    Byte[] title = new UTF8Encoding(true).GetBytes(stringToFile.ToString());
+                    fs.Write(title, 0, title.Length);       
+                }
+
+                stringToFile.Clear();
+                foreach (var student in galvoti)
+                {
+                    stringToFile.Append(student.ToString());
+                }
+                
+                using (FileStream fs = File.Create(galvotiFile))
+                {    
+                    // Add some text to file    
+                    Byte[] title = new UTF8Encoding(true).GetBytes(stringToFile.ToString());
+                    fs.Write(title, 0, title.Length);
+                }
+            }    
+            catch (Exception Ex)    
+            {    
+                Console.WriteLine("Nepavyko irasyti failu... baigiamas darbas");    
+            }
+            
+            Console.WriteLine("Vargsiuku: "+vargsiukai.Count);
+            Console.WriteLine("Galvotu: "+galvoti.Count);
         }
 
         public static void InputByConsole()

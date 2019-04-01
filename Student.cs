@@ -19,5 +19,10 @@
             IsInputFromFile = vIsInputFromFile;
             IsAvgSelected = vIsAvgSelected;
         }
+
+        public override string ToString()
+        {
+            return Name + " " + Surname + " " + AvgResult + ";\n";
+        }
     }
 }
