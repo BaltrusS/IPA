@@ -4,7 +4,7 @@ Integruotu programavimo aplinku 3-4 laboratorinis darbas.
 
 ## Versijavimas
 
-Kiekviena versija turi savo saka (angl. branch) ir versijos relyza github aplinkoje.
+versijos release github aplinkoje.
 
 # v0.1
 
