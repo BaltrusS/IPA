@@ -30,3 +30,10 @@ Atlikta:
 * Iskelti meniu pasirinkimai i atskirus metodus;
 * Pritaikytas isimciu valdymas;
 * Klaidos taisymas;
+
+# v0.4
+
+Atlikta:
+* Pridetas meniu pasirinkimas "efektyvumas";
+* Cia sugeneruojami 5 failai su skirtingais sarasu ilgiais;
+* Pridetas studentu grupavimas pagal galutini pazymi i failus;
