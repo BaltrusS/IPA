@@ -71,7 +71,10 @@ namespace IPA
                 
                 if (select.Equals("6"))
                 {
-                    
+                    foreach (var type in  TIPAI) {
+                        Console.WriteLine(type + " rusiavimas:");
+                        TestContainers(type);;
+                    }
                     break;
                 }
 
@@ -126,7 +129,7 @@ namespace IPA
             }
         }
         
-        private static void GroupToFiles(string filePath, bool noLogging = false, bool withOutput = true, string type = "LIST")
+        private static void GroupToFiles(string filePath, bool noLog = false, bool output = true, string type = "LIST")
         {
             IEnumerable<Student> vargsiukaiEnum;
             IEnumerable<Student> galvotiEnum;
@@ -201,7 +204,7 @@ namespace IPA
                     break;
             }
 
-            if (withOutput) {
+            if (output) {
                 try {
                     StudentToFile(galvotiEnum, galvotiFile);
                     StudentToFile(vargsiukaiEnum, vargsiukaiFile);
@@ -211,7 +214,7 @@ namespace IPA
                 }
             }
 
-            if (noLogging) return;
+            if (noLog) return;
             Console.WriteLine("Vargsiukai: " + vargsiukaiEnum.Count());
             Console.WriteLine("Galvoti: " + galvotiEnum.Count());
         }
@@ -248,7 +251,7 @@ namespace IPA
             Console.WriteLine(truko + "ms surusiuoti " + FILES.Length + " failus");
         }
         
-        private static void ContainerTesting(string type = "LIST") {
+        private static void TestContainers(string type = "LIST") {
             Stopwatch watch;
             long truko;
 

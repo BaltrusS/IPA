@@ -36,43 +36,38 @@ Prideta:
 
 efektyvumas ( LIST: rusiavimas + failu isvedimas):
 
-7ms surusiuoti faila "10studentu.txt"
-1ms surusiuoti faila "100studentu.txt"
-3ms surusiuoti faila "1000studentu.txt"
-25ms surusiuoti faila "10000studentu.txt"
-276ms surusiuoti faila "100000studentu.txt"
-321ms surusiuoti 5 failus
+6ms surusiuoti faila "10studentu.txt"
+0ms surusiuoti faila "100studentu.txt"
+1ms surusiuoti faila "1000studentu.txt"
+21ms surusiuoti faila "10000studentu.txt"
+228ms surusiuoti faila "100000studentu.txt"
+329ms surusiuoti 5 failus
 
 # v0.5 efektyvumas:
 
 LIST rusiavimas:
-23ms surusiuoti faila "10studentu.txt"
-3ms surusiuoti faila "100studentu.txt"
-11ms surusiuoti faila "1000studentu.txt"
-83ms surusiuoti faila "10000studentu.txt"
-597ms surusiuoti faila "100000studentu.txt"
-759ms surusiuoti 5 failus
+6ms surusiuoti faila "10studentu.txt"
+0ms surusiuoti faila "100studentu.txt"
+1ms surusiuoti faila "1000studentu.txt"
+21ms surusiuoti faila "10000studentu.txt"
+228ms surusiuoti faila "100000studentu.txt"
+329ms surusiuoti 5 failus
 
 QUEUE rusiavimas:
-1ms surusiuoti faila "10studentu.txt"
+0ms surusiuoti faila "10studentu.txt"
 0ms surusiuoti faila "100studentu.txt"
-6ms surusiuoti faila "1000studentu.txt"
-68ms surusiuoti faila "10000studentu.txt"
-595ms surusiuoti faila "100000studentu.txt"
-720ms surusiuoti 5 failus
+1ms surusiuoti faila "1000studentu.txt"
+20ms surusiuoti faila "10000studentu.txt"
+251ms surusiuoti faila "100000studentu.txt"
+310ms surusiuoti 5 failus
 
 LINKEDLIST rusiavimas:
-1ms surusiuoti faila "10studentu.txt"
+0ms surusiuoti faila "10studentu.txt"
 0ms surusiuoti faila "100studentu.txt"
-6ms surusiuoti faila "1000studentu.txt"
-61ms surusiuoti faila "10000studentu.txt"
-592ms surusiuoti faila "100000studentu.txt"
-757ms surusiuoti 5 failus
-
-QUEUE ir LINKEDLIST trunka beveik tiek pat. 
-Greiciausiai 5 failus rusiuoja QUEUE.
-LIST mazu failu rusiavimas uztrunka zymiai ilgiau nei kiti.
-10000 studentu faila, greiciausiai nuskaito LINKEDLIST, lenkdamas kitus vos pora ms.
+4ms surusiuoti faila "1000studentu.txt"
+29ms surusiuoti faila "10000studentu.txt"
+260ms surusiuoti faila "100000studentu.txt"
+360ms surusiuoti 5 failus
 
 # v1.0
 
