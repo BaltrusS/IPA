@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 
@@ -8,35 +9,63 @@ namespace IPA
 {
     internal class Program
     {
+        public static string[] TIPAI = new[] {
+            "LIST",
+            "QUEUE",
+            "LINKEDLIST"
+        };
+        
+        public static string[] FILES = new[] {
+            @"C:\Users\Baltrus\Documents\IPA\IPA\10studentu.txt",
+            @"C:\Users\Baltrus\Documents\IPA\IPA\100studentu.txt",
+            @"C:\Users\Baltrus\Documents\IPA\IPA\1000studentu.txt",
+            @"C:\Users\Baltrus\Documents\IPA\IPA\10000studentu.txt",
+            @"C:\Users\Baltrus\Documents\IPA\IPA\100000studentu.txt"
+        };
+        
         public static void Main(string[] args)
         {
-            var Input = "";
+            var select = "";
 
             Console.WriteLine("Iveskite duomenu ivedimo tipa:");
             Console.WriteLine("1 - duomenu ivedimas is failo");
             Console.WriteLine("2 - duomenu ivedimas konsoleje");
-            Console.WriteLine("3 - efektyvumas");
+            Console.WriteLine("3 - generuoti failus");
+            Console.WriteLine("4 - rusiuoti i failus");
+            Console.WriteLine("5 - skaiciuoti laika");
+            Console.WriteLine("6 - testutoi konteinerius");
 
             while (true)
             {
-                Input = Console.ReadLine();
+                select = Console.ReadLine();
 
-                if (Input.Equals("1"))
+                if (select.Equals("1"))
                 {
-                    InputByFile();
+                    ReadFromFile();
                     break;
                 }
 
-                if (Input.Equals("2"))
+                if (select.Equals("2"))
                 {
-                    InputByConsole();
+                    ReadFromConsole();
                     break;
                 }
                 
-                if (Input.Equals("3"))
+                if (select.Equals("3"))
                 {
-                    //setupFiles();
-                    groupToFiles();
+                    setupFiles();
+                    break;
+                }
+
+                if (select.Equals("4"))
+                {
+                    groupToFiles(FILES[4]);
+                    break;
+                }
+                
+                if (select.Equals("5"))
+                {
+                    //SpeedAnalysis();
                     break;
                 }
 
@@ -55,7 +84,7 @@ namespace IPA
                 for (int i = 0; i < 5; i++)
                 {
                     amountPrefix = amountPrefix * 10;
-                    string fileName = fileLoc + amountPrefix + "students.txt";
+                    string fileName = fileLoc + amountPrefix + "studentu.txt";
                     Console.WriteLine(fileName);
                     // Check if file already exists. If yes, delete it.     
                     if (File.Exists(fileName))
@@ -91,82 +120,113 @@ namespace IPA
             }
         }
         
-        private static void groupToFiles()
+        private static void groupToFiles(string filePath, bool noLogging = false, bool withOutput = true, string TYPE = "LIST")
         {
-            string[] fileInput;
+            IEnumerable<Student> vargsiukaiEnum;
+            IEnumerable<Student> galvotiEnum;
             var vargsiukai = new List<Student>();
             var galvoti = new List<Student>();
-            string vargsiukaiFile = @"C:\Users\Baltrus\Documents\IPA\IPA\vargsiukai.txt";
-            string galvotiFile = @"C:\Users\Baltrus\Documents\IPA\IPA\galvoti.txt";
-
-            try
-            {
-                fileInput = File.ReadAllLines(
-                    @"C:\Users\Baltrus\Documents\IPA\IPA\100000students.txt");
-                foreach (var line in fileInput)
-                {
-                    var student = GetStudentData(true, line);
-                    if (student.AvgResult>=5)
-                    {
-                        galvoti.Add(student);
-                    }
-                    else
-                    {
-                        vargsiukai.Add(student);
+            var vargsiukaiQueue = new Queue<Student>();
+            var galvotiQueue = new Queue<Student>();
+            var vargsiukaiLinkedList = new LinkedList<Student>();
+            var galvotiLinkedList = new LinkedList<Student>();
+            
+            const string galvotiFile = @"C:\Users\Baltrus\Documents\IPA\IPA\galvoti.txt";
+            const string vargsiukaiFile = @"C:\Users\Baltrus\Documents\IPA\IPA\vargsiukai.txt";
+            
+            try {
+                var fileInput = System.IO.File.ReadAllLines(filePath);
+                
+                foreach (var line in fileInput) {
+                    var student = CreationOfStudent(true, line);
+                    
+                    switch (TYPE) {
+                        case "LIST":
+                            if (student.AvgResult >= 5) {
+                                galvoti.Add(student);
+                            } else {
+                                vargsiukai.Add(student);
+                            }
+                            break;
+                        case "QUEUE":
+                            if (student.AvgResult >= 5) {
+                                galvotiQueue.Enqueue(student);
+                            } else {
+                                vargsiukaiQueue.Enqueue(student);
+                            }
+                            break;
+                        case "LINKEDLIST":
+                            if (student.AvgResult >= 5) {
+                                galvotiLinkedList.AddLast(student);
+                            } else {
+                                vargsiukaiLinkedList.AddLast(student);
+                            }
+                            break;
+                        default:
+                            if (student.AvgResult >= 5) {
+                                galvoti.Add(student);
+                            } else {
+                                vargsiukai.Add(student);
+                            }
+                            break;
                     }
                 }
-            }
-            catch
-            {
+            } catch {
                 Console.WriteLine("-----------------!!!!!!!!!-----------------");
                 Console.WriteLine("Nepavyko nuskaityti failo. Baigiamas darbas");
             }
             
-            try    
-            {    
-                // Check if file already exists. If yes, delete it.     
-                if (File.Exists(vargsiukaiFile) || File.Exists(galvotiFile))    
-                {    
-                    File.Delete(vargsiukaiFile);
-                    File.Delete(galvotiFile);
-                }    
-    
-                StringBuilder stringToFile = new StringBuilder();
-                foreach (var student in vargsiukai)
-                {
-                    stringToFile.Append(student.ToString());
-                }
-                
-                using (FileStream fs = File.Create(vargsiukaiFile))     
-                {    
-                    // Add some text to file    
-                    Byte[] title = new UTF8Encoding(true).GetBytes(stringToFile.ToString());
-                    fs.Write(title, 0, title.Length);       
-                }
+            switch (TYPE) {
+                case "LIST":
+                    galvotiEnum = galvoti;
+                    vargsiukaiEnum = vargsiukai;
+                    break;
+                case "QUEUE":
+                    galvotiEnum = galvotiQueue;
+                    vargsiukaiEnum = vargsiukaiQueue;
+                    break;
+                case "LINKEDLIST":
+                    galvotiEnum = galvotiLinkedList;
+                    vargsiukaiEnum = vargsiukaiLinkedList;
+                    break;
+                default: // Assign something, to ignore IDE init errors...
+                    galvotiEnum = galvoti;
+                    vargsiukaiEnum = vargsiukai;
+                    break;
+            }
 
-                stringToFile.Clear();
-                foreach (var student in galvoti)
-                {
-                    stringToFile.Append(student.ToString());
+            if (withOutput) {
+                try {
+                    StudentToFile(galvotiEnum, galvotiFile);
+                    StudentToFile(vargsiukaiEnum, vargsiukaiFile);
+                } catch (Exception e) {
+                    Console.WriteLine("Nepavyko irasyti failu. Programa uzsidaro.");
+                    Environment.Exit(1);
                 }
-                
-                using (FileStream fs = File.Create(galvotiFile))
-                {    
-                    // Add some text to file    
-                    Byte[] title = new UTF8Encoding(true).GetBytes(stringToFile.ToString());
-                    fs.Write(title, 0, title.Length);
-                }
-            }    
-            catch (Exception Ex)    
-            {    
-                Console.WriteLine("Nepavyko irasyti failu... baigiamas darbas");    
+            }
+
+            if (noLogging) return;
+            Console.WriteLine("Vargsiukai: " + vargsiukaiEnum.Count());
+            Console.WriteLine("Galvoti: " + galvotiEnum.Count());
+        }
+        
+        private static void StudentToFile(IEnumerable<Student> list, string fileName) {
+            if (File.Exists(fileName)) {    
+                File.Delete(fileName);
             }
             
-            Console.WriteLine("Vargsiuku: "+vargsiukai.Count);
-            Console.WriteLine("Galvotu: "+galvoti.Count);
+            /*
+             foreach (var line in fileInput) {
+                    var student = GetStudentData(true, line);
+                    students.Enqueue(student);
+                }
+             */
+            var studList = list.Select(student => student.Name + ' ' + student.Surname).ToList();
+
+            File.WriteAllLines(fileName, studList, Encoding.UTF8);
         }
 
-        public static void InputByConsole()
+        public static void ReadFromConsole()
         {
             var continueInput = true;
             var students = new List<Student>();
@@ -178,7 +238,7 @@ namespace IPA
 
                 if (continueInput)
                 {
-                    var student = GetStudentData(false, null);
+                    var student = CreationOfStudent(false, null);
                     students.Add(student);
                 }
             }
@@ -187,7 +247,7 @@ namespace IPA
             Console.ReadKey();
         }
 
-        public static void InputByFile()
+        public static void ReadFromFile()
         {
             string[] fileInput;
             var students = new List<Student>();
@@ -198,7 +258,7 @@ namespace IPA
                     @"C:\Users\Baltrus\Documents\IPA\IPA\students.txt");
                 foreach (var line in fileInput)
                 {
-                    var student = GetStudentData(true, line);
+                    var student = CreationOfStudent(true, line);
                     students.Add(student);
                 }
 
@@ -209,7 +269,7 @@ namespace IPA
             {
                 Console.WriteLine("----------------------!!!!!!!!!------------------------");
                 Console.WriteLine("Nepavyko nuskaityti failo. Duomenis veskite per konsole");
-                InputByConsole();
+                ReadFromConsole();
             }
         }
 
@@ -219,11 +279,11 @@ namespace IPA
             if (students.Any())
             {
                 sortedStudents = students.OrderBy(o => o.Name).ToList();
-                StudentsTable(sortedStudents);
+                StudentsResultConsoleOut(sortedStudents);
             }
         }
 
-        public static Student GetStudentData(bool isInputFromFile, string line)
+        public static Student CreationOfStudent(bool inputFromFile, string line)
         {
             string name;
             string surname;
@@ -235,21 +295,21 @@ namespace IPA
             double medianResult = 0, avgResult = 0;
 
             var isAvgSelected = true;
-            var generateNumbers = false;
+            var generateGrade = false;
 
             var homeWorkResults = new List<int>();
 
-            if (isInputFromFile && line != null) inputLine = line.Split(' ');
+            if (inputFromFile && line != null) inputLine = line.Split(' ');
 
             /* Vardo ivedimas */
-            name = isInputFromFile ? inputLine[0] : GetStudentName();
+            name = inputFromFile ? inputLine[0] : InputName();
 
 
             /* Pavardes ivedimas */
-            surname = isInputFromFile ? inputLine[1] : GetStudentSurname();
+            surname = inputFromFile ? inputLine[1] : InputSurname();
 
             /* Namu darbu rezultatu ivedimas */
-            if (isInputFromFile)
+            if (inputFromFile)
             {
                 for (var i = 2; i < inputLine.Length - 1; i++)
                     try
@@ -269,14 +329,14 @@ namespace IPA
                 Console.Write("Ar sugeneruoti balus? Y/N: ");
 
                 input = Console.ReadLine();
-                generateNumbers = input.ToLower().Equals("y");
+                generateGrade = input.ToLower().Equals("y");
 
-                homeWorkResults = GetStudentHomeWorkSum(generateNumbers);
+                homeWorkResults = InputHomeWorkSum(generateGrade);
             }
 
 
             /* Egzamino rezultato ivedimas */
-            if (isInputFromFile)
+            if (inputFromFile)
                 try
                 {
                     testResult = int.Parse(inputLine[inputLine.Length - 1]);
@@ -288,28 +348,28 @@ namespace IPA
                     Environment.Exit(1);
                 }
             else
-                testResult = GetStudentTestResult(generateNumbers);
+                testResult = InputExamResult(generateGrade);
 
             /* Vidurkio skaiciavimas */
-            if (isInputFromFile)
+            if (inputFromFile)
             {
-                avgResult = 0.3 * GetStudentAvgHwResult(homeWorkResults) + 0.7 * testResult;
-                medianResult = 0.3 * GetStudentMedianHwResult(homeWorkResults) + 0.7 * testResult;
+                avgResult = 0.3 * GetAverageHWResult(homeWorkResults) + 0.7 * testResult;
+                medianResult = 0.3 * GetMedianHWResult(homeWorkResults) + 0.7 * testResult;
             }
             else
             {
-                isAvgSelected = GetStudentChoiceOfAvg();
+                isAvgSelected = InputTypeOfCalculation();
                 if (isAvgSelected)
-                    avgResult = 0.3 * GetStudentAvgHwResult(homeWorkResults) + 0.7 * testResult;
+                    avgResult = 0.3 * GetAverageHWResult(homeWorkResults) + 0.7 * testResult;
                 else
-                    medianResult = 0.3 * GetStudentMedianHwResult(homeWorkResults) + 0.7 * testResult;
+                    medianResult = 0.3 * GetMedianHWResult(homeWorkResults) + 0.7 * testResult;
             }
 
-            var stud = new Student(name, surname, avgResult, medianResult, isInputFromFile, isAvgSelected);
+            var stud = new Student(name, surname, avgResult, medianResult, inputFromFile, isAvgSelected);
             return stud;
         }
 
-        public static string GetStudentName()
+        public static string InputName()
         {
             string name;
             while (true)
@@ -322,7 +382,7 @@ namespace IPA
             return name;
         }
 
-        public static string GetStudentSurname()
+        public static string InputSurname()
         {
             string surname;
             while (true)
@@ -335,7 +395,7 @@ namespace IPA
             return surname;
         }
 
-        public static List<int> GetStudentHomeWorkSum(bool generateNumbers)
+        public static List<int> InputHomeWorkSum(bool generateGrades)
         {
             var continueInput = true;
 
@@ -343,7 +403,7 @@ namespace IPA
             var random = new Random();
 
 
-            if (!generateNumbers) Console.WriteLine("Iveskite namu darbu rezultatus (1-10): ");
+            if (!generateGrades) Console.WriteLine("Iveskite namu darbu rezultatus (1-10): ");
 
             while (continueInput)
             {
@@ -351,7 +411,7 @@ namespace IPA
                 {
                     int homeWorkVal;
 
-                    if (generateNumbers)
+                    if (generateGrades)
                     {
                         homeWorkResults.Add(random.Next(0, 11));
                         Console.Write("Sugeneruotas rezultatas: {0}\n", homeWorkResults[homeWorkResults.Count - 1]);
@@ -382,13 +442,13 @@ namespace IPA
             return homeWorkResults;
         }
 
-        public static int GetStudentTestResult(bool generateNumbers)
+        public static int InputExamResult(bool generateGrades)
         {
             int testResult;
             var random = new Random();
 
             Console.WriteLine();
-            if (!generateNumbers)
+            if (!generateGrades)
             {
                 Console.Write("Egzamino pazymis: ");
 
@@ -405,7 +465,7 @@ namespace IPA
             return testResult;
         }
 
-        public static bool GetStudentChoiceOfAvg()
+        public static bool InputTypeOfCalculation()
         {
             string input;
             bool isAvgSelected;
@@ -432,32 +492,32 @@ namespace IPA
             return isAvgSelected;
         }
 
-        public static double GetStudentAvgHwResult(List<int> homeWorkResults)
+        public static double GetAverageHWResult(List<int> homeWorkResults)
         {
             return homeWorkResults.Average();
         }
 
-        public static double GetStudentMedianHwResult(List<int> homeWorkResults)
+        public static double GetMedianHWResult(List<int> homeWorkResults)
         {
-            double medianHWResult;
+            double hwResult;
 
             var ys = homeWorkResults.OrderBy(x => x).ToList();
             var mid = (ys.Count() - 1) / 2.0;
-            medianHWResult = (ys[(int) mid] + ys[(int) (mid + 0.5)]) / 2;
+            hwResult = (ys[(int) mid] + ys[(int) (mid + 0.5)]) / 2;
 
-            return medianHWResult;
+            return hwResult;
         }
 
-        public static void StudentsTable(List<Student> students)
+        public static void StudentsResultConsoleOut(List<Student> students)
         {
-            var tableName = "Vardas";
-            var tableSurname = "Pavarde";
-            var tableAvg = "Galutinis (Vid.)";
-            var tableMed = "Galutinis (Med.)";
-            var tempS = "/";
-            var defaultOffset = 6;
-            var columnVardasLenght = 6; // For longest name
-            var columnPavardeLength = 7; // For longest surname
+            var vardas = "Vardas";
+            var pavarde = "Pavarde";
+            var vidurkis = "Galutinis (Vid.)";
+            var mediana = "Galutinis (Med.)";
+            var temp = "/";
+            var defaultOffset = 8;
+            var columnVardasLenght = 8; // For longest name
+            var columnPavardeLength = 9; // For longest surname
 
             foreach (var student in students)
             {
@@ -467,22 +527,22 @@ namespace IPA
 
             /* Column names */
             Console.WriteLine("{0}{1}{2}{3}{4}",
-                FormatSpaces(tableName, ' ', Math.Abs(columnVardasLenght - tableName.Length) + defaultOffset),
-                FormatSpaces(tableSurname, ' ', Math.Abs(columnPavardeLength - tableSurname.Length) + defaultOffset),
-                FormatSpaces(tableAvg, ' ', defaultOffset / 2),
-                FormatSpaces(tempS, ' ', defaultOffset / 2),
-                tableMed);
+                FormatSpaces(vardas, ' ', Math.Abs(columnVardasLenght - vardas.Length) + defaultOffset),
+                FormatSpaces(pavarde, ' ', Math.Abs(columnPavardeLength - pavarde.Length) + defaultOffset),
+                FormatSpaces(vidurkis, ' ', defaultOffset / 2),
+                FormatSpaces(temp, ' ', defaultOffset / 2),
+                mediana);
 
             Console.WriteLine(FormatSpaces("", '-',
-                columnVardasLenght + columnPavardeLength + 3 * defaultOffset + tableAvg.Length + tableMed.Length +
-                tempS.Length));
+                columnVardasLenght + columnPavardeLength + 3 * defaultOffset + vidurkis.Length + mediana.Length +
+                temp.Length));
 
             /* Results */
             foreach (var student in students)
             {
                 var columnNameOffset = columnVardasLenght - student.Name.Length + defaultOffset;
                 var columnSurnameOffset = columnPavardeLength - student.Surname.Length + defaultOffset +
-                                          (tableAvg.Length - student.AvgResult.ToString().Length - 3) + 2;
+                                          (vidurkis.Length - student.AvgResult.ToString().Length - 3) + 2;
                 Console.Write("{0}{1}",
                     FormatSpaces(student.Name, ' ', columnNameOffset),
                     FormatSpaces(student.Surname, ' ', columnSurnameOffset));
@@ -491,15 +551,15 @@ namespace IPA
                 {
                     var columnAvgResultOffset = "   " + student.AvgResult;
                     Console.WriteLine("{0:F2} {1} {2:F2}", student.AvgResult, FormatSpaces("", ' ',
-                            defaultOffset + tempS.Length + tableMed.Length - columnAvgResultOffset.Length),
+                            defaultOffset + temp.Length + mediana.Length - columnAvgResultOffset.Length),
                         student.MedianResult);
                 }
                 else
                 {
                     Console.WriteLine("{0} {1}", student.IsAvgSelected
                             ? $"{student.AvgResult:F2}"
-                            : FormatSpaces("", ' ', defaultOffset + tempS.Length + tableMed.Length),
-                        !student.IsAvgSelected ? $"{student.AvgResult:F2}" : FormatSpaces("", ' ', tableMed.Length));
+                            : FormatSpaces("", ' ', defaultOffset + temp.Length + mediana.Length),
+                        !student.IsAvgSelected ? $"{student.AvgResult:F2}" : FormatSpaces("", ' ', mediana.Length));
                 }
             }
         }
