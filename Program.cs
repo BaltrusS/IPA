@@ -53,19 +53,25 @@ namespace IPA
                 
                 if (select.Equals("3"))
                 {
-                    setupFiles();
+                    SetupFiles();
                     break;
                 }
 
                 if (select.Equals("4"))
                 {
-                    groupToFiles(FILES[4]);
+                    GroupToFiles(FILES[4]);
                     break;
                 }
                 
                 if (select.Equals("5"))
                 {
-                    //SpeedAnalysis();
+                    CountSortTime();
+                    break;
+                }
+                
+                if (select.Equals("6"))
+                {
+                    
                     break;
                 }
 
@@ -73,7 +79,7 @@ namespace IPA
             }
         }
 
-        public static void setupFiles()
+        public static void SetupFiles()
         {
             string fileLoc = @"C:\Users\Baltrus\Documents\IPA\IPA\";
             int amountPrefix = 1;
@@ -120,7 +126,7 @@ namespace IPA
             }
         }
         
-        private static void groupToFiles(string filePath, bool noLogging = false, bool withOutput = true, string TYPE = "LIST")
+        private static void GroupToFiles(string filePath, bool noLogging = false, bool withOutput = true, string type = "LIST")
         {
             IEnumerable<Student> vargsiukaiEnum;
             IEnumerable<Student> galvotiEnum;
@@ -140,7 +146,7 @@ namespace IPA
                 foreach (var line in fileInput) {
                     var student = CreationOfStudent(true, line);
                     
-                    switch (TYPE) {
+                    switch (type) {
                         case "LIST":
                             if (student.AvgResult >= 5) {
                                 galvoti.Add(student);
@@ -176,7 +182,7 @@ namespace IPA
                 Console.WriteLine("Nepavyko nuskaityti failo. Baigiamas darbas");
             }
             
-            switch (TYPE) {
+            switch (type) {
                 case "LIST":
                     galvotiEnum = galvoti;
                     vargsiukaiEnum = vargsiukai;
@@ -208,6 +214,61 @@ namespace IPA
             if (noLogging) return;
             Console.WriteLine("Vargsiukai: " + vargsiukaiEnum.Count());
             Console.WriteLine("Galvoti: " + galvotiEnum.Count());
+        }
+        
+        private static void CountSortTime() {   
+            Stopwatch watch;
+            long truko;
+            
+            // Generate all files
+            if (TIPAI.Any(File.Exists)) {
+                watch = Stopwatch.StartNew();
+                SetupFiles();
+                watch.Stop();
+                truko = watch.ElapsedMilliseconds;
+                Console.WriteLine(truko + "ms sugeneruoti " + FILES.Length + " failus.");
+            }
+
+            // Sort single file
+            foreach (var path in FILES) {
+                watch = Stopwatch.StartNew();
+                GroupToFiles(path, true);
+                watch.Stop();
+                truko = watch.ElapsedMilliseconds;
+                Console.WriteLine(truko + "ms surusiuoti faila \"" + path + "\"");
+            }
+            
+            // Sort all files
+            watch = Stopwatch.StartNew();
+            foreach (var path in FILES) {
+                GroupToFiles(path, true);
+            }
+            watch.Stop();
+            truko = watch.ElapsedMilliseconds;
+            Console.WriteLine(truko + "ms surusiuoti " + FILES.Length + " failus");
+        }
+        
+        private static void ContainerTesting(string type = "LIST") {
+            Stopwatch watch;
+            long truko;
+
+            // Sort single file
+            foreach (var path in FILES) {
+                watch = Stopwatch.StartNew();
+                GroupToFiles(path, true, false, type);
+                watch.Stop();
+                truko = watch.ElapsedMilliseconds;
+                Console.WriteLine(truko + "ms surusiuoti faila \"" + path + "\"");
+            }
+            
+            // Sort all files
+            watch = Stopwatch.StartNew();
+            foreach (var path in FILES) {
+                GroupToFiles(path, true, true, type);
+            }
+            watch.Stop();
+            truko = watch.ElapsedMilliseconds;
+            Console.WriteLine(truko + "ms surusiuoti " + FILES.Length + " failus");
         }
         
         private static void StudentToFile(IEnumerable<Student> list, string fileName) {

@@ -36,39 +36,38 @@ Prideta:
 
 efektyvumas ( LIST: rusiavimas + failu isvedimas):
 
-554ms sugeneruoti 5 failus.
-20ms surusiuoti faila "10studentu.txt"
-34ms surusiuoti faila "100studentu.txt"
-7ms surusiuoti faila "1000studentu.txt"
-94ms surusiuoti faila "10000studentu.txt"
-762ms surusiuoti faila "100000studentu.txt"
-1209ms surusiuoti 5 failus
+7ms surusiuoti faila "10studentu.txt"
+1ms surusiuoti faila "100studentu.txt"
+3ms surusiuoti faila "1000studentu.txt"
+25ms surusiuoti faila "10000studentu.txt"
+276ms surusiuoti faila "100000studentu.txt"
+321ms surusiuoti 5 failus
 
 # v0.5 efektyvumas:
 
-LIST rusiavimas.
+LIST rusiavimas:
 23ms surusiuoti faila "10studentu.txt"
 3ms surusiuoti faila "100studentu.txt"
 11ms surusiuoti faila "1000studentu.txt"
 83ms surusiuoti faila "10000studentu.txt"
 597ms surusiuoti faila "100000studentu.txt"
-759ms surusiuoti visus 5 failus
+759ms surusiuoti 5 failus
 
-QUEUE rusiavimas.
+QUEUE rusiavimas:
 1ms surusiuoti faila "10studentu.txt"
 0ms surusiuoti faila "100studentu.txt"
 6ms surusiuoti faila "1000studentu.txt"
 68ms surusiuoti faila "10000studentu.txt"
 595ms surusiuoti faila "100000studentu.txt"
-720ms surusiuoti visus 5 failus
+720ms surusiuoti 5 failus
 
-LINKEDLIST rusiavimas.
+LINKEDLIST rusiavimas:
 1ms surusiuoti faila "10studentu.txt"
 0ms surusiuoti faila "100studentu.txt"
 6ms surusiuoti faila "1000studentu.txt"
 61ms surusiuoti faila "10000studentu.txt"
 592ms surusiuoti faila "100000studentu.txt"
-757ms surusiuoti visus 5 failus
+757ms surusiuoti 5 failus
 
 QUEUE ir LINKEDLIST trunka beveik tiek pat. 
 Greiciausiai 5 failus rusiuoja QUEUE.
