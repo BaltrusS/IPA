@@ -59,8 +59,18 @@ namespace IPA
 
                 if (select.Equals("4"))
                 {
-                    GroupToFiles(FILES[4]);
-                    break;
+                    Console.Write("Rinkites source faila (1-5): ");
+                    try
+                    {
+                        int source = Int32.Parse(Console.ReadLine());
+                        if (source > 0 && source < 6)
+                        {
+                            GroupToFiles(FILES[source-1]);
+                            break; 
+                        } else Console.WriteLine("Bad choice...");
+                        
+                    }
+                    catch (Exception ex){}
                 }
                 
                 if (select.Equals("5"))
@@ -78,7 +88,7 @@ namespace IPA
                     break;
                 }
 
-                Console.WriteLine("Bad input, karotkite!");
+                Console.WriteLine("Bad input, karotkite renkantis is komandu virsuje.");
             }
         }
 
@@ -229,7 +239,7 @@ namespace IPA
                 SetupFiles();
                 watch.Stop();
                 truko = watch.ElapsedMilliseconds;
-                Console.WriteLine(truko + "ms sugeneruoti " + FILES.Length + " failus.");
+                Console.Write(truko + "ms sugeneruoti " + FILES.Length + " failus.");
             }
 
             // Sort single file
@@ -261,7 +271,10 @@ namespace IPA
                 GroupToFiles(path, true, false, type);
                 watch.Stop();
                 truko = watch.ElapsedMilliseconds;
-                Console.WriteLine(truko + "ms surusiuoti faila \"" + path + "\"");
+                Console.Write(truko + "ms surusiuoti faila \"" + path + "\" ");
+                
+                Process proc = Process.GetCurrentProcess();
+                Console.WriteLine("Memory used: " + (proc.PrivateMemorySize64/(1024*1024))+"Mb");
             }
             
             // Sort all files

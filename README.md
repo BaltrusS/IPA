@@ -69,6 +69,29 @@ LINKEDLIST rusiavimas:
 260ms surusiuoti faila "100000studentu.txt"
 360ms surusiuoti 5 failus
 
-# v1.0
+# v1.0 atminties naudojimas skirtingom strategijom ir laikas
 
+# 1 strategija:
+LIST rusiavimas:
+5ms surusiuoti faila "10studentu.txt" Memory used: 10Mb
+0ms surusiuoti faila "100studentu.txt" Memory used: 10Mb
+1ms surusiuoti faila "1000studentu.txt" Memory used: 11Mb
+20ms surusiuoti faila "10000studentu.txt" Memory used: 17Mb
+225ms surusiuoti faila "100000studentu.txt" Memory used: 36Mb
+316ms surusiuoti 5 failus
+QUEUE rusiavimas:
+0ms surusiuoti faila "10studentu.txt" Memory used: 45Mb
+0ms surusiuoti faila "100studentu.txt" Memory used: 45Mb
+1ms surusiuoti faila "1000studentu.txt" Memory used: 45Mb
+20ms surusiuoti faila "10000studentu.txt" Memory used: 46Mb
+238ms surusiuoti faila "100000studentu.txt" Memory used: 37Mb
+297ms surusiuoti 5 failus
+LINKEDLIST rusiavimas:
+0ms surusiuoti faila "10studentu.txt" Memory used: 43Mb
+0ms surusiuoti faila "100studentu.txt" Memory used: 43Mb
+1ms surusiuoti faila "1000studentu.txt" Memory used: 43Mb
+28ms surusiuoti faila "10000studentu.txt" Memory used: 42Mb
+270ms surusiuoti faila "100000studentu.txt" Memory used: 57Mb
+326ms surusiuoti 5 failus
 
+# 2 strategija:
