@@ -124,12 +124,12 @@ LINKEDLIST rusiavimas:
 Matome, kad lasinant is LIST irasus tai kainuoja labai daug laiko ir tikrai neverta to daryti del keliu laimetu Mb atminties.
 
 # Paleidimo instrukcija:
-Parsisiusti projekto repozitorija ir github.com;
-Su betkuria IDE importuoti koda;
-Kompiliuoti projekta;
+- Parsisiusti projekto repozitorija ir github.com;
+- Su betkuria IDE importuoti koda;
+- Kompiliuoti projekta;
 
 # How to use:
-Sukompiliavus projekta pasileisti IPA.exe.
-*Patarimas leisti programa tiesiai is IDE, kadangi ivykdzius viena is meniu pasirinkimu programa baigia darba.
-Pasirinkus komanda siuloma is meniu ivedus jos skaiciu;
-Ivykdzius viena komanda programa baigia darba.
+- Sukompiliavus projekta pasileisti IPA.exe.
+- Patarimas leisti programa tiesiai is IDE, kadangi ivykdzius viena is meniu pasirinkimu programa baigia darba.
+- Pasirinkus komanda siuloma is meniu ivedus jos skaiciu;
+- Ivykdzius viena komanda programa baigia darba.
