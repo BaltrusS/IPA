@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="3f905c02-6185-4e42-8603-8156657ebc98" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.IPA/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.IPA/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Program.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -17,8 +16,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Program.cs">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="544">
-              <caret line="49" column="38" lean-forward="true" selection-start-line="49" selection-start-column="38" selection-end-line="49" selection-end-column="38" />
+            <state relative-caret-position="160">
+              <caret line="286" column="13" lean-forward="true" selection-start-line="286" selection-start-column="13" selection-end-line="286" selection-end-column="13" />
               <folding>
                 <marker date="1555595532749" expanded="false" signature="6:128" ph="..." />
                 <marker date="1555595532749" expanded="true" signature="143:23464" ph="{...}" />
@@ -228,7 +227,7 @@
       <workItem from="1554109313640" duration="5498000" />
       <workItem from="1554371275833" duration="1349000" />
       <workItem from="1555002011793" duration="7616000" />
-      <workItem from="1555584841428" duration="10650000" />
+      <workItem from="1555584841428" duration="11555000" />
     </task>
     <task id="LOCAL-00001" summary="Added function for v0.4 gruoping students in files">
       <created>1554114807009</created>
@@ -349,11 +348,25 @@
       <option name="project" value="LOCAL" />
       <updated>1555595435149</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="v1.0 done in most efficient way regarding time, not memory">
+      <created>1555596197003</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1555596197003</updated>
+    </task>
+    <task id="LOCAL-00019" summary="v1.0 done in most efficient way regarding time, not memory. Read me fixes">
+      <created>1555596334723</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1555596334723</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="25134000" />
+    <option name="totallyTimeSpent" value="26039000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -419,7 +432,9 @@
     <MESSAGE value="v0.5 donezo" />
     <MESSAGE value="v1.0 half done" />
     <MESSAGE value="v1.0 done with less efficient way regarding time" />
-    <option name="LAST_COMMIT_MESSAGE" value="v1.0 done with less efficient way regarding time" />
+    <MESSAGE value="v1.0 done in most efficient way regarding time, not memory" />
+    <MESSAGE value="v1.0 done in most efficient way regarding time, not memory. Read me fixes" />
+    <option name="LAST_COMMIT_MESSAGE" value="v1.0 done in most efficient way regarding time, not memory. Read me fixes" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -447,8 +462,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Program.cs">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="544">
-          <caret line="49" column="38" lean-forward="true" selection-start-line="49" selection-start-column="38" selection-end-line="49" selection-end-column="38" />
+        <state relative-caret-position="160">
+          <caret line="286" column="13" lean-forward="true" selection-start-line="286" selection-start-column="13" selection-end-line="286" selection-end-column="13" />
           <folding>
             <marker date="1555595532749" expanded="false" signature="6:128" ph="..." />
             <marker date="1555595532749" expanded="true" signature="143:23464" ph="{...}" />

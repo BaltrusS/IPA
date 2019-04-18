@@ -71,8 +71,8 @@ LINKEDLIST rusiavimas:
 
 # v1.0 atminties naudojimas skirtingom strategijom ir laikas
 
-# 1 strategija:
-LIST rusiavimas:
+### 1 strategija:
+**LIST** rusiavimas:
 5ms surusiuoti faila "10studentu.txt" Memory used: 10Mb
 0ms surusiuoti faila "100studentu.txt" Memory used: 10Mb
 1ms surusiuoti faila "1000studentu.txt" Memory used: 11Mb
@@ -80,7 +80,7 @@ LIST rusiavimas:
 225ms surusiuoti faila "100000studentu.txt" Memory used: 36Mb
 316ms surusiuoti 5 failus
 
-QUEUE rusiavimas:
+**QUEUE** rusiavimas:
 0ms surusiuoti faila "10studentu.txt" Memory used: 45Mb
 0ms surusiuoti faila "100studentu.txt" Memory used: 45Mb
 1ms surusiuoti faila "1000studentu.txt" Memory used: 45Mb
@@ -88,7 +88,7 @@ QUEUE rusiavimas:
 238ms surusiuoti faila "100000studentu.txt" Memory used: 37Mb
 297ms surusiuoti 5 failus
 
-LINKEDLIST rusiavimas:
+**LINKEDLIST** rusiavimas:
 0ms surusiuoti faila "10studentu.txt" Memory used: 43Mb
 0ms surusiuoti faila "100studentu.txt" Memory used: 43Mb
 1ms surusiuoti faila "1000studentu.txt" Memory used: 43Mb
@@ -96,8 +96,8 @@ LINKEDLIST rusiavimas:
 270ms surusiuoti faila "100000studentu.txt" Memory used: 57Mb
 326ms surusiuoti 5 failus
 
-# 2 strategija:
-LIST rusiavimas:
+### 2 strategija:
+**LIST** rusiavimas:
 6ms surusiuoti faila "10studentu.txt" Memory used: 10Mb
 0ms surusiuoti faila "100studentu.txt" Memory used: 10Mb
 2ms surusiuoti faila "1000studentu.txt" Memory used: 11Mb
@@ -105,14 +105,14 @@ LIST rusiavimas:
 14175ms surusiuoti faila "100000studentu.txt" Memory used: 36Mb
 14105ms surusiuoti 5 failus
 
-QUEUE rusiavimas:
+**QUEUE** rusiavimas:
 0ms surusiuoti faila "10studentu.txt" Memory used: 44Mb
 0ms surusiuoti faila "100studentu.txt" Memory used: 44Mb
 1ms surusiuoti faila "1000studentu.txt" Memory used: 44Mb
 25ms surusiuoti faila "10000studentu.txt" Memory used: 45Mb
 257ms surusiuoti faila "100000studentu.txt" Memory used: 39Mb
 378ms surusiuoti 5 failus
-LINKEDLIST rusiavimas:
+**LINKEDLIST** rusiavimas:
 
 0ms surusiuoti faila "10studentu.txt" Memory used: 51Mb
 0ms surusiuoti faila "100studentu.txt" Memory used: 51Mb
