@@ -160,80 +160,37 @@ namespace IPA
                 {
                     var student = CreationOfStudent(true, line);
 
-                    switch (type)
-                    {
+                    switch (type) {
                         case "LIST":
-                        {
-                            galvoti.Add(student);
+                            if (student.AvgResult >= 5) {
+                                galvoti.Add(student);
+                            } else {
+                                vargsiukai.Add(student);
+                            }
                             break;
-                        }
-                        case "LINKEDLIST":
-                        {
-                            galvotiLinkedList.AddLast(student);
-                            break;
-                        }
                         case "QUEUE":
-                        {
-                            galvotiQueue.Enqueue(student);
+                            if (student.AvgResult >= 5) {
+                                galvotiQueue.Enqueue(student);
+                            } else {
+                                vargsiukaiQueue.Enqueue(student);
+                            }
                             break;
-                        }
+                        case "LINKEDLIST":
+                            if (student.AvgResult >= 5) {
+                                galvotiLinkedList.AddLast(student);
+                            } else {
+                                vargsiukaiLinkedList.AddLast(student);
+                            }
+                            break;
                         default:
-                            galvoti.Add(student);
+                            if (student.AvgResult >= 5) {
+                                galvoti.Add(student);
+                            } else {
+                                vargsiukai.Add(student);
+                            }
                             break;
                     }
                 }
-
-                switch (type)
-                    {
-                        case "LIST":
-                        {
-                            foreach (var galvotas in galvoti.ToList())
-                            {
-                                if (galvotas.AvgResult < 5)
-                                {
-                                    vargsiukai.Add(galvotas);
-                                    galvoti.Remove(galvotas);
-                                }
-                            }
-
-                            break;
-                        }
-                        case "LINKEDLIST":
-                        {
-                            var node = galvotiLinkedList.First;
-                            while (node != null)
-                            {
-                                var next = node.Next;
-
-                                var studentas = node.Value;
-
-                                if (studentas.AvgResult < 5)
-                                {
-                                    vargsiukaiLinkedList.AddLast(studentas);
-                                    galvotiLinkedList.Remove(node);
-                                }
-
-                                node = next;
-                            }
-
-                            break;
-                        }
-                        case "QUEUE":
-                        {
-                            foreach (var galvotas in galvotiQueue.ToList())
-                            {
-                                if (galvotas.AvgResult < 5)
-                                {
-                                    vargsiukaiQueue.Enqueue(galvotas);
-                                }
-                                else
-                                {
-                                    galvotiQueue.Enqueue(galvotas);
-                                }
-                            }
-                            break;
-                        }
-                    }
 
             } catch (Exception ex) {
                 Console.WriteLine("-----------------!!!!!!!!!-----------------");
