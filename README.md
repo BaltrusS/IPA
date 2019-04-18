@@ -79,6 +79,7 @@ LIST rusiavimas:
 20ms surusiuoti faila "10000studentu.txt" Memory used: 17Mb
 225ms surusiuoti faila "100000studentu.txt" Memory used: 36Mb
 316ms surusiuoti 5 failus
+
 QUEUE rusiavimas:
 0ms surusiuoti faila "10studentu.txt" Memory used: 45Mb
 0ms surusiuoti faila "100studentu.txt" Memory used: 45Mb
@@ -86,6 +87,7 @@ QUEUE rusiavimas:
 20ms surusiuoti faila "10000studentu.txt" Memory used: 46Mb
 238ms surusiuoti faila "100000studentu.txt" Memory used: 37Mb
 297ms surusiuoti 5 failus
+
 LINKEDLIST rusiavimas:
 0ms surusiuoti faila "10studentu.txt" Memory used: 43Mb
 0ms surusiuoti faila "100studentu.txt" Memory used: 43Mb
@@ -95,3 +97,30 @@ LINKEDLIST rusiavimas:
 326ms surusiuoti 5 failus
 
 # 2 strategija:
+LIST rusiavimas:
+6ms surusiuoti faila "10studentu.txt" Memory used: 10Mb
+0ms surusiuoti faila "100studentu.txt" Memory used: 10Mb
+2ms surusiuoti faila "1000studentu.txt" Memory used: 11Mb
+97ms surusiuoti faila "10000studentu.txt" Memory used: 17Mb
+14175ms surusiuoti faila "100000studentu.txt" Memory used: 36Mb
+14105ms surusiuoti 5 failus
+
+QUEUE rusiavimas:
+0ms surusiuoti faila "10studentu.txt" Memory used: 44Mb
+0ms surusiuoti faila "100studentu.txt" Memory used: 44Mb
+1ms surusiuoti faila "1000studentu.txt" Memory used: 44Mb
+25ms surusiuoti faila "10000studentu.txt" Memory used: 45Mb
+257ms surusiuoti faila "100000studentu.txt" Memory used: 39Mb
+378ms surusiuoti 5 failus
+LINKEDLIST rusiavimas:
+
+0ms surusiuoti faila "10studentu.txt" Memory used: 51Mb
+0ms surusiuoti faila "100studentu.txt" Memory used: 51Mb
+1ms surusiuoti faila "1000studentu.txt" Memory used: 52Mb
+24ms surusiuoti faila "10000studentu.txt" Memory used: 54Mb
+267ms surusiuoti faila "100000studentu.txt" Memory used: 41Mb
+341ms surusiuoti 5 failus
+
+Matome, kad lasinant is LIST irasus tai kainuoja labai daug laiko ir tikrai neverta to daryti del keliu laimetu Mb atminties.
+
+# 

@@ -155,44 +155,90 @@ namespace IPA
             
             try {
                 var fileInput = System.IO.File.ReadAllLines(filePath);
-                
-                foreach (var line in fileInput) {
+
+                foreach (var line in fileInput)
+                {
                     var student = CreationOfStudent(true, line);
-                    
-                    switch (type) {
+
+                    switch (type)
+                    {
                         case "LIST":
-                            if (student.AvgResult >= 5) {
-                                galvoti.Add(student);
-                            } else {
-                                vargsiukai.Add(student);
-                            }
+                        {
+                            galvoti.Add(student);
                             break;
-                        case "QUEUE":
-                            if (student.AvgResult >= 5) {
-                                galvotiQueue.Enqueue(student);
-                            } else {
-                                vargsiukaiQueue.Enqueue(student);
-                            }
-                            break;
+                        }
                         case "LINKEDLIST":
-                            if (student.AvgResult >= 5) {
-                                galvotiLinkedList.AddLast(student);
-                            } else {
-                                vargsiukaiLinkedList.AddLast(student);
-                            }
+                        {
+                            galvotiLinkedList.AddLast(student);
                             break;
+                        }
+                        case "QUEUE":
+                        {
+                            galvotiQueue.Enqueue(student);
+                            break;
+                        }
                         default:
-                            if (student.AvgResult >= 5) {
-                                galvoti.Add(student);
-                            } else {
-                                vargsiukai.Add(student);
-                            }
+                            galvoti.Add(student);
                             break;
                     }
                 }
-            } catch {
+
+                switch (type)
+                    {
+                        case "LIST":
+                        {
+                            foreach (var galvotas in galvoti.ToList())
+                            {
+                                if (galvotas.AvgResult < 5)
+                                {
+                                    vargsiukai.Add(galvotas);
+                                    galvoti.Remove(galvotas);
+                                }
+                            }
+
+                            break;
+                        }
+                        case "LINKEDLIST":
+                        {
+                            var node = galvotiLinkedList.First;
+                            while (node != null)
+                            {
+                                var next = node.Next;
+
+                                var studentas = node.Value;
+
+                                if (studentas.AvgResult < 5)
+                                {
+                                    vargsiukaiLinkedList.AddLast(studentas);
+                                    galvotiLinkedList.Remove(node);
+                                }
+
+                                node = next;
+                            }
+
+                            break;
+                        }
+                        case "QUEUE":
+                        {
+                            foreach (var galvotas in galvotiQueue.ToList())
+                            {
+                                if (galvotas.AvgResult < 5)
+                                {
+                                    vargsiukaiQueue.Enqueue(galvotas);
+                                }
+                                else
+                                {
+                                    galvotiQueue.Enqueue(galvotas);
+                                }
+                            }
+                            break;
+                        }
+                    }
+
+            } catch (Exception ex) {
                 Console.WriteLine("-----------------!!!!!!!!!-----------------");
-                Console.WriteLine("Nepavyko nuskaityti failo. Baigiamas darbas");
+                Console.WriteLine("Nepavyko nuskaityti failo. Baigiamas darbas"+ex.Message);
+                Environment.Exit(1);
             }
             
             switch (type) {
